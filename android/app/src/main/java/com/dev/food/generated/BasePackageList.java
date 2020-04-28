@@ -1,4 +1,4 @@
-package com.awesomeproject.generated;
+package com.dev.food.generated;
 
 import java.util.Arrays;
 import java.util.List;

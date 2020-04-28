@@ -1,9 +1,9 @@
 {
-  "name": "AwesomeProject",
-  "displayName": "AwesomeProject",
+  "name": "DevFood",
+  "displayName": "DevFood",
   "expo": {
-    "name": "AwesomeProject",
-    "slug": "AwesomeProject",
+    "name": "DevFood",
+    "slug": "DevFood",
     "version": "1.0.0",
     "platforms": [
       "ios",

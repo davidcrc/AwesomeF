@@ -28,6 +28,12 @@
 
     sudo npm install @react-native-community/geolocation --save
 
+    - Login with facebook:
+    npm install --save react-native-fbsdk
+
+#Rename package
+    npm install react-native-rename
+    react-native-rename "MyApp" -b com.mycompany.myapp
 
 # Map react
 
@@ -46,3 +52,41 @@
 
     npx react-native run-android
     npm start --reset-cache
+
+
+#Facebook login :: https://github.com/facebook/react-native-fbsdk
+    - Create App in:
+    https://developers.facebook.com/
+
+    ...
+    3:
+        Package: com.dev.food
+        Name predetermi: .MainApplication  <== AndroidManifest <application android:name=".MainApplication" ...>
+
+    - Generate a key for this app (copy generated key):
+
+        keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+        
+            pass keys: android
+
+    - Generate other in:
+
+        cd android/app/
+        keytool -exportcert -alias androiddebugkey -keystore debug.keystore | openssl sha1 -binary | openssl base64
+
+            pass keys: android
+
+    - Before, both keys paste in , Hashes de clave , and Save.
+
+    - Abre el archivo /app/res/values/strings.xml.
+        <string name="facebook_app_id">################</string> <string name="fb_login_protocol_scheme">################</string>
+
+    - Abre el archivo /app/manifest/AndroidManifest.xml.
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/    facebook_app_id"/> <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" /> <activity android:name="com.facebook.CustomTabActivity" android:exported="true"> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:scheme="@string/fb_login_protocol_scheme" /> </intent-filter> </activity>
+
+
+
+        
