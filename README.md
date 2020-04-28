@@ -24,6 +24,8 @@
             ...
         }
 
+        npx react-native run-android
+
     sudo npm install @react-native-community/geolocation --save
 
 
@@ -34,9 +36,13 @@
       android:name="com.google.android.geo.API_KEY"
       android:value="Your Google maps API Key Here"/>
 
+    npx react-native run-android
     npm start --reset-cache
 
 
 #Geolocalization
     ./android/app/ser/main/AndroidManifest.xml
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    npx react-native run-android
+    npm start --reset-cache
