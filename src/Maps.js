@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import MapView, { Marker } from 'react-native-maps';
 
-export default class Address extends Component {
+export default class Map extends Component {
 
   constructor(props) {
      super(props);
