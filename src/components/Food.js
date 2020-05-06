@@ -22,6 +22,7 @@ export default class App extends Component {
   {
     super(props);
     this.state = {
+      isLoading: false,
       dataBanner:[],
       dataCategories:[],
       dataFood:[],
@@ -36,7 +37,7 @@ export default class App extends Component {
     .then((responseJson) => {
 
       this.setState({
-        isLoading: false,
+        isLoading: true,
         dataBanner: responseJson.banner,
         dataCategories: responseJson.categories,
         dataFood:responseJson.food
@@ -128,7 +129,7 @@ export default class App extends Component {
       <ScrollView>
         <View style={{ flex: 1,backgroundColor:"#f2f2f2" }}>
           <View style={{width: width, alignItems:'center'}} >
-              <Image style={{height:60,width:width/2,margin:10 }} resizeMode="contain" source={require("./image/foodapp.png")}  />
+              <Image style={{height:60,width:width/2,margin:10 }} resizeMode="contain" source={require("../recursos/images/foodapp.png")}  />
               <Swiper style={{height:width/2}}  showsButtons={false} autoplay={true} autoplayTimeout={2}>
                 {
                   this.state.dataBanner.map((itembann)=>{

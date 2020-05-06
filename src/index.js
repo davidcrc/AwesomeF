@@ -3,10 +3,10 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 
 var { width } = Dimensions.get("window")
 
 // import Components
-import Food from './Food'
-import Cart from './Cart'
-import Address from './Address'
-import Profile from './Profile'
+import Food from '@components/Food'
+import Cart from '@components/Cart'
+import Address from '@components/Address'
+import Profile from '@components/Profile'
 // unable console yellow
 console.disableYellowBox = true;
 // import icons
@@ -31,18 +31,22 @@ export default class App extends Component {
           :<Profile />
          }
          <View style={styles.bottomTab}>
+
            <TouchableOpacity style={styles.itemTab} onPress={()=>this.setState({module:1})}>
              <Icon name="md-restaurant" size={30} color={this.state.module==1?"#900":"gray"} />
              <Text>Food</Text>
            </TouchableOpacity>
+           
            <TouchableOpacity style={styles.itemTab} onPress={()=>this.setState({module:2})}>
              <Icon name="md-basket" size={30} color={this.state.module==2?"#900":"gray"} />
              <Text>Cart</Text>
            </TouchableOpacity>
+           
            <TouchableOpacity style={styles.itemTab} onPress={()=>this.setState({module:3})}>
              <Icon name="md-map" size={30} color={this.state.module==3?"#900":"gray"} />
              <Text>Address</Text>
            </TouchableOpacity>
+           
            <TouchableOpacity style={styles.itemTab} onPress={()=>this.setState({module:4})}>
              <Icon name="md-contact" size={30} color={this.state.module==4?"#900":"gray"} />
              <Text>Profile</Text>
