@@ -53,13 +53,9 @@ export default class Cart extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={ styles.container }>
 
-        <View style={{ height: 20 }} />
-
-        <Text style={{ fontSize: 32, fontWeight: "bold", color: "#33c37d" }}>Cart food</Text>
-        
-        <View style={{ height: 10 }} />
+        <Text style={ styles.TxtCart }>Cart food</Text>        
 
         <View style={{ flex: 1 }}>
 
@@ -69,31 +65,35 @@ export default class Cart extends Component {
               this.state.dataCart.map((item, i) => {
                 return (
 
-                  <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
+                  <View style={ styles.container_cart  }>
 
                     <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={{ uri: item.food.image }} />
 
-                    <View style={{ flex: 1, backgroundColor: 'trangraysparent', padding: 10, justifyContent: "space-between" }}>
+                    <View style={ styles.eachProduct }>
 
+                      {/* Name and Description */}
                       <View>
                         <Text style={{ fontWeight: "bold", fontSize: 20 }}>{item.food.name}</Text>
                         <Text>Lorem Ipsum de food</Text>
                       </View>
 
+                      {/* Price and quantity */}
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         
+                        {/* Price */}
                         <Text style={{ fontWeight: 'bold', color: "#33c37d", fontSize: 20 }}>${item.price * item.quantity}</Text>
                         
+                        {/* Quantity */}
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                           
                           <TouchableOpacity onPress={() => this.onChangeQual(i, false)}>
-                            <Icon name="ios-remove-circle" size={35} color={"#33c37d"} />
+                            <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
                           </TouchableOpacity>
                           
-                          <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>{item.quantity}</Text>
+                          <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 17 }}>[{item.quantity}]</Text>
                           
                           <TouchableOpacity onPress={() => this.onChangeQual(i, true)}>
-                            <Icon name="ios-add-circle" size={35} color={"#33c37d"} />
+                            <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
                           
                           </TouchableOpacity>
 
@@ -133,3 +133,31 @@ export default class Cart extends Component {
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  TxtCart: {
+      fontSize: 32,
+      fontWeight: "bold",
+      color: "#33c37d",
+      marginTop: 15,
+      marginBottom: 5
+    },
+    container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    container_cart: {
+      width: width - 20,
+      margin: 10,
+      backgroundColor: 'transparent',
+      flexDirection: 'row',
+      borderBottomWidth: 2,
+      borderColor: "#cccccc",
+      paddingBottom: 10
+    },
+    eachProduct: {
+      flex: 1,
+      backgroundColor: 'transparent',
+      padding: 10,
+      justifyContent: "space-between"
+    }
+
+});

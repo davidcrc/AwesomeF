@@ -7,7 +7,8 @@ import { Text,
     Dimensions,
     ScrollView,
     TouchableOpacity,
-    TextInput } from 'react-native';
+    TextInput,
+    ActivityIndicator } from 'react-native';
 import Swiper from 'react-native-swiper'
 
 var {height, width } = Dimensions.get('window');
@@ -22,7 +23,7 @@ export default class App extends Component {
   {
     super(props);
     this.state = {
-      isLoading: false,
+      isLoading: true,
       dataBanner:[],
       dataCategories:[],
       dataFood:[],
@@ -37,7 +38,7 @@ export default class App extends Component {
     .then((responseJson) => {
 
       this.setState({
-        isLoading: true,
+        isLoading: false,
         dataBanner: responseJson.banner,
         dataCategories: responseJson.categories,
         dataFood:responseJson.food
@@ -125,40 +126,72 @@ export default class App extends Component {
     }
   }
   render() {
+    const logo = require("@recursos/images/foodapp.png")
+    const config_logo = {height:100,width:width/2,margin:10 }
+    // if(this.state.isLoading){
+		// 	return(
+		// 		<View style={styles.container}>
+		// 			<ActivityIndicator color='#8a1e04' size='large'style={{marginTop:100}}></ActivityIndicator>
+		// 			<Text style={{color:'#8a1e04', alignSelf:'center'}}>Cargando datos...</Text>
+		// 		</View>
+		// 	)
+		// }
     return (
       <ScrollView>
-        <View style={{ flex: 1,backgroundColor:"#f2f2f2" }}>
-          <View style={{width: width, alignItems:'center'}} >
-              <Image style={{height:60,width:width/2,margin:10 }} resizeMode="contain" source={require("../recursos/images/foodapp.png")}  />
-              <Swiper style={{height:width/2}}  showsButtons={false} autoplay={true} autoplayTimeout={2}>
-                {
-                  this.state.dataBanner.map((itembann)=>{
-                    return(
-                      <Image style={styles.imageBanner} resizeMode="contain" source={{uri:itembann}}/>
-                    )
-                  })
-                }
-              </Swiper>
-              <View style={{height:20}} />
-          </View>
 
-          <View style={{width:width, borderRadius:20, paddingVertical:20, backgroundColor:'white'}}>
+        <View style={{ flex: 1, backgroundColor: "#f2f2f2" }}>
+
+          {/* Banner */}
+          <View style={{ width: width, alignItems: 'center' }} >
+
+            {/* initial Logo  */}
+            <Image style={config_logo} resizeMode="contain" source={logo} />
+
+            <Swiper style={{ height: width / 2 }} showsButtons={false} autoplay={true} autoplayTimeout={2}>
+              {
+                this.state.dataBanner.map((itembann) => {
+                  return (
+
+                    <Image style={styles.imageBanner} resizeMode="contain" source={{ uri: itembann }} />
+                  )
+                })
+              }
+            </Swiper>
+
+            <View style={{ height: 20 }} />
+
+          </View>
+          {
+            this.state.isLoading ?
+            
+            <View style={styles.container}>
+              <ActivityIndicator color='#8a1e04' size='large'style={{marginTop:100}}></ActivityIndicator>
+              <Text style={{color:'#8a1e04', alignSelf:'center'}}>loading data...</Text>
+            </View>
+          :
+          
+          <View style={{ width: width, borderRadius: 20, paddingVertical: 20, backgroundColor: 'white' }}>
+            
             <Text style={styles.titleCatg}>Categories</Text>
+            
             <FlatList
               horizontal={true}
               data={this.state.dataCategories}
               renderItem={({ item }) => this._renderItem(item)}
-              keyExtractor = { (item,index) => index.toString() }
+              keyExtractor={(item, index) => index.toString()}
             />
+            
             <FlatList
               //horizontal={true}
               data={this.state.dataFood}
               numColumns={2}
               renderItem={({ item }) => this._renderItemFood(item)}
-              keyExtractor = { (item,index) => index.toString() }
+              keyExtractor={(item, index) => index.toString()}
             />
-            <View style={{height:20}} />
+            <View style={{ height: 20 }} />
+
           </View>
+          }
 
         </View>
       </ScrollView>
